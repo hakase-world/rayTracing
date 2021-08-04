@@ -10,7 +10,6 @@ private:
 public:
 //コンストラクター
 	vec3(double e0=0., double e1=0., double e2=0.);
-	vec3();
 //デストラクター
 	~vec3();
 //アクセサー
