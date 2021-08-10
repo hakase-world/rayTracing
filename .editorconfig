@@ -1,0 +1,9 @@
+root = true
+#ファイル文字エンコーディングはUTF8-BOM付き
+charset = utf-8-bom
+#インデントはタブ文字
+indent_style = tab
+#行の終わりから空白を削除
+trim_trailing_whitespace = true
+#ファイルの最後は改行で終わる
+insert_final_newline = true
