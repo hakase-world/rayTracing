@@ -78,6 +78,8 @@ inline vec3 vec3::operator*(const double t)const{return vec3(e[0]*t,e[1]*t,e[2]*
 inline vec3 vec3::operator/(const vec3&v)const{return vec3(e[0]/v.e[0],e[1]/v.e[1],e[2]/v.e[2]);}
 inline vec3 vec3::operator/(double t)const{return vec3(e[0]/t,e[1]/t,e[2]/t);}
 
+inline vec3 operator*(double t,const vec3&v){return vec3(t*v.x(),t*v.y(),t*v.z());}
+
 inline double vec3::dot(const vec3&u,const vec3&v){return u.e[0]*v.e[0]+u.e[1]*v.e[1]+u.e[2]*v.e[2];}
 inline vec3 vec3::cross(const vec3&u,const vec3&v){return vec3(u.e[1]*v.e[2]-u.e[2]*v.e[1],u.e[2]*v.e[0]-u.e[0]*v.e[2],u.e[0]*v.e[1]-u.e[1]*v.e[0]);}
 inline vec3 vec3::unit_vector(const vec3&v){return v/v.length();}
