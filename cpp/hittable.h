@@ -8,6 +8,12 @@ struct hit_record
 	point3 p;
 	vec3 normal;
 	double t;
+	bool front_face;
+
+	inline void set_face_nomal(const ray&r, const vec3&outward_nomal){
+		front_face = vec3::dot(r.direction(),outward_nomal) < 0;
+		normal = front_face ? outward_nomal : -outward_nomal;
+	}
 };
 
 class hittable
