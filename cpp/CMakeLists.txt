@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.8)
 project(Raytracing)
 
 #ソースファイルと実行ファイルの指定
-add_executable(rayTracing main.cpp)
+add_executable(rt main.cpp)
 
 #C++標準規格の指定
 set(CMAKE_CXX_STANDARD 17)
