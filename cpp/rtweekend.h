@@ -23,6 +23,12 @@ inline double random_double()
 	return distribution(generator);
 }
 
+inline double clamp(double x,double min,double max){
+	if(x < min) return min;
+	if(x > max) return max;
+	return x;
+}
+
 //共通ヘッダー
 #include "ray.h"
 #include "vec3.h"
