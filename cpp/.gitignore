@@ -1,2 +1,3 @@
 #cmake buid directory
 build/
+.vscode/
