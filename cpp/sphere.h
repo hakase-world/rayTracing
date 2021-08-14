@@ -42,7 +42,7 @@ bool sphere::hit(const ray &r, double t_min, double t_max, hit_record &rec) cons
 
 	rec.t = root;
 	rec.p = r.at(rec.t);
-	vec3 outward_nomal = (rec.p - center) - radius;
+	vec3 outward_nomal = (rec.p - center) / radius;
 	rec.set_face_nomal(r, outward_nomal);
 
 	return true;
