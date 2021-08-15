@@ -9,16 +9,17 @@ class sphere : public hittable
 private:
 	point3 center;
 	double radius;
+	std::shared_ptr<material> mat_ptr;
 
 public:
 	sphere();
-	sphere(point3, double);
+	sphere(point3, double, std::shared_ptr<material>);
 
 	virtual bool hit(const ray &r, double t_min, double t_max, hit_record &rec) const override;
 };
 
-sphere::sphere(point3 cen, double r)
-	: center(cen), radius(r) {}
+sphere::sphere(point3 cen, double r, std::shared_ptr<material> m)
+	: center(cen), radius(r), mat_ptr(m) {}
 
 bool sphere::hit(const ray &r, double t_min, double t_max, hit_record &rec) const
 {
@@ -44,6 +45,7 @@ bool sphere::hit(const ray &r, double t_min, double t_max, hit_record &rec) cons
 	rec.p = r.at(rec.t);
 	vec3 outward_nomal = (rec.p - center) / radius;
 	rec.set_face_nomal(r, outward_nomal);
+	rec.mat_ptr = mat_ptr;
 
 	return true;
 }
