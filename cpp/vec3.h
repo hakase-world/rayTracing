@@ -109,7 +109,7 @@ inline vec3 vec3::random()
 {
 	return vec3(random_double(), random_double(), random_double());
 }
-inline static vec3 random(double min, double max)
+inline vec3 vec3::random(double min, double max)
 {
 	return vec3(
 		random_double(min, max),
