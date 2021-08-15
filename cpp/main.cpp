@@ -7,6 +7,21 @@
 
 #include <iostream>
 
+color ray_color(ray r, const hittable &world)
+{
+	hit_record rec;
+	double absorption = 1;
+	while (world.hit(r, 0.001, infinity, rec))
+	{
+		point3 target = rec.p + rec.normal + vec3::random_in_unit_sphere();
+		r = ray(rec.p, target - rec.p);
+		absorption *= 0.5;
+	}
+	vec3 unit_direction = vec3::unit_vector(r.direction());
+	auto t = 0.5 * (unit_direction.y() + 1.0);
+	return ((1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0)) * absorption;
+}
+
 color ray_color(const ray &r, const hittable &world, int depth)
 {
 	hit_record rec;
