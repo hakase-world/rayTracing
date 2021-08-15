@@ -45,7 +45,7 @@ public:
 	static inline vec3 unit_vector(const vec3 &v);
 	inline static vec3 random();
 	inline static vec3 random(double, double);
-	vec3 random_in_unit_sphere();
+	static vec3 random_in_unit_sphere();
 };
 
 //コンストラクター
