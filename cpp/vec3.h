@@ -46,6 +46,7 @@ public:
 	inline static vec3 random();
 	inline static vec3 random(double, double);
 	static vec3 random_in_unit_sphere();
+	inline vec3 random_unit_vector();
 };
 
 //コンストラクター
@@ -126,6 +127,11 @@ vec3 vec3::random_in_unit_sphere()
 			continue;
 		return p;
 	}
+}
+
+inline vec3 vec3::random_unit_vector()
+{
+	return unit_vector(random_in_unit_sphere());
 }
 
 // vec3の型エイリアス
