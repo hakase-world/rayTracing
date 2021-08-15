@@ -48,6 +48,7 @@ public:
 	static vec3 random_in_unit_sphere();
 	inline static vec3 random_unit_vector();
 	inline static vec3 random_in_hemisphere(const vec3 &);
+	inline static vec3 reflect(const vec3 &, const vec3 &);
 };
 
 //コンストラクター
@@ -142,6 +143,11 @@ inline vec3 vec3::random_in_hemisphere(const vec3 &normal)
 		return in_unit_sphere;
 	else
 		return -in_unit_sphere;
+}
+
+inline vec3 vec3::reflect(const vec3 &v, const vec3 &n)
+{
+	return v - 2 * vec3::dot(v, n) * n;
 }
 
 // vec3の型エイリアス
