@@ -11,16 +11,16 @@
 color ray_color(ray r, const hittable &world)
 {
 	hit_record rec;
-	double absorption = 1;
+	long long absorption = 1;
 	while (world.hit(r, 0.001, infinity, rec))
 	{
 		point3 target = rec.p + rec.normal + vec3::random_in_unit_sphere();
 		r = ray(rec.p, target - rec.p);
-		absorption *= 0.5;
+		++absorption;
 	}
 	vec3 unit_direction = vec3::unit_vector(r.direction());
 	auto t = 0.5 * (unit_direction.y() + 1.0);
-	return ((1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0)) * absorption;
+	return ((1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0)) * std::pow(0.5, absorption);
 }
 
 color ray_color(const ray &r, const hittable &world, int depth)
@@ -85,7 +85,8 @@ int main()
 				auto u = (i + random_double()) / (image_width - 1);
 				auto v = (j + random_double()) / (image_height - 1);
 				ray r = cam.get_ray(u, v);
-				pixel_color += ray_color(r, world, max_depth);
+				//pixel_color += ray_color(r, world, max_depth);
+				pixel_color += ray_color(r, world);
 			}
 			write_color(std::cout, pixel_color, samples_per_pixel);
 		}
