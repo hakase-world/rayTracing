@@ -55,21 +55,18 @@ int main()
 	const int max_depth = 50;
 
 	// World
+
+	auto R = std::cos(pi/4);
 	hittable_list world;
 
-	auto material_ground = std::make_shared<lambertian>(color(0.8, 0.8, 0.0));
-	auto material_center = std::make_shared<lambertian>(color(0.1, 0.2, 0.5));
-	auto material_left = std::make_shared<dielectric>(1.5);
-	auto material_right = std::make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
+    auto material_left  = std::make_shared<lambertian>(color(0,0,1));
+    auto material_right = std::make_shared<lambertian>(color(1,0,0));
 
-	world.add(std::make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
-	world.add(std::make_shared<sphere>(point3(0.0, 0.0, -1.0), 0.5, material_center));
-	world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
-	world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.4, material_left));
-	world.add(std::make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
+    world.add(std::make_shared<sphere>(point3(-R, 0, -1), R, material_left));
+    world.add(std::make_shared<sphere>(point3( R, 0, -1), R, material_right));
 
 	// Camera
-	camera cam;
+	camera cam(90,aspect_ratio);
 
 	// Render
 	std::cout << "P3\n"
@@ -85,8 +82,8 @@ int main()
 				auto u = (i + random_double()) / (image_width - 1);
 				auto v = (j + random_double()) / (image_height - 1);
 				ray r = cam.get_ray(u, v);
-				//pixel_color += ray_color(r, world, max_depth);
-				pixel_color += ray_color(r, world);
+				pixel_color += ray_color(r, world, max_depth);
+				//pixel_color += ray_color(r, world);
 			}
 			write_color(std::cout, pixel_color, samples_per_pixel);
 		}
