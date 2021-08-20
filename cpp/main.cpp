@@ -88,12 +88,12 @@ hittable_list random_scene()
 	}
 
 	auto material1 = std::make_shared<dielectric>(1.5);
-	world.add(std::make_shared<sphere>(point3(0, 1, 0), 1.0, material));
+	world.add(std::make_shared<sphere>(point3(0, 1, 0), 1.0, material1));
 
 	auto material2 = std::make_shared<lambertian>(color(0.4, 0.2, 0.1));
 	world.add(std::make_shared<sphere>(point3(-4, 1, 0), 1.0, material2));
 
-	auto material3 = std::make_shared<metal>(color(0.7, 0.5, 0.5) 0.0);
+	auto material3 = std::make_shared<metal>(color(0.7, 0.5, 0.5), 0.0);
 	world.add(std::make_shared<sphere>(point3(4, 1, 0), 1.0, material3));
 
 	return world;
@@ -103,34 +103,22 @@ int main()
 {
 
 	// Image
-	const auto aspect_ratio = 16.0 / 9.0;
-	const int image_width = 384;
+	const auto aspect_ratio = 3.0 / 2.0;
+	const int image_width = 1200;
 	const int image_height = static_cast<int>(image_width / aspect_ratio);
-	const int samples_per_pixel = 100;
+	const int samples_per_pixel = 500;
 	const int max_depth = 50;
 
 	// World
 
-	auto R = std::cos(pi / 4);
-	hittable_list world;
-
-	auto material_ground = std::make_shared<lambertian>(color(0.8, 0.8, 0.0));
-	auto material_center = std::make_shared<lambertian>(color(0.1, 0.2, 0.5));
-	auto material_left = std::make_shared<dielectric>(1.5);
-	auto material_right = std::make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
-
-	world.add(std::make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
-	world.add(std::make_shared<sphere>(point3(0.0, 0.0, -1.0), 0.5, material_center));
-	world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
-	world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.45, material_left));
-	world.add(std::make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
+	auto world = random_scene();
 
 	// Camera
-	point3 lookfrom(3, 3, 2);
-	point3 lookat(0, 0, -1);
+	point3 lookfrom(12, 2, 3);
+	point3 lookat(0, 0, 0);
 	vec3 vup(0, 1, 0);
-	auto dist_to_focus = (lookfrom - lookat).length();
-	auto aperture = 2.0;
+	auto dist_to_focus = 10;
+	auto aperture = 0.1;
 
 	camera cam(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
 
