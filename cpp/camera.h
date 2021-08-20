@@ -33,6 +33,8 @@ camera::camera(point3 lookfrom, point3 lookat, vec3 vup, double vfov, double asp
 	horizontal = focus_dist * viewport_width * u;
 	vertical = focus_dist * viewport_height * v;
 	lower_left_corner = origin - horizontal / 2 - vertical / 2 - focus_dist * w;
+
+	lens_radius = aperture /2;
 }
 
 ray camera::get_ray(double s, double t) const
